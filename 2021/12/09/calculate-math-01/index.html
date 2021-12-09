@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM">
 <meta property="article:published_time" content="2021-12-09T10:26:04.000Z">
-<meta property="article:modified_time" content="2021-12-09T12:50:43.066Z">
+<meta property="article:modified_time" content="2021-12-09T12:55:05.264Z">
 <meta property="article:author" content="Starduston">
 <meta property="article:tag" content="math">
 <meta name="twitter:card" content="summary">
@@ -215,7 +215,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-12-09 18:26:04 / Modified: 20:50:43" itemprop="dateCreated datePublished" datetime="2021-12-09T18:26:04+08:00">2021-12-09</time>
+      <time title="Created: 2021-12-09 18:26:04 / Modified: 20:55:05" itemprop="dateCreated datePublished" datetime="2021-12-09T18:26:04+08:00">2021-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,9 +257,12 @@
 </ul>
 <h2 id="误差来源和分类">1.3 误差来源和分类</h2>
 <h3 id="来源与分类">1.3.1 来源与分类</h3>
-<p><img src="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM" alt="误差来源与分类" /> 1. 模型误差<br />
-实际问题抽象成数学模型作简化所长生的误差</p>
-<ol start="2" type="1">
+<figure>
+<img src="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM" alt="误差来源与分类" /><figcaption aria-hidden="true">误差来源与分类</figcaption>
+</figure>
+<ol type="1">
+<li><p>模型误差<br />
+实际问题抽象成数学模型作简化所长生的误差</p></li>
 <li><p><strong>截断误差</strong><br />
 数学问题转化为数值问题时算法所产生的误差</p></li>
 <li><p>观测误差<br />
@@ -307,11 +310,19 @@
 <h2 id="向量范数和矩阵范数">1.4 向量范数和矩阵范数</h2>
 <h3 id="向量范数">1.4.1 向量范数</h3>
 <h4 id="定义">定义</h4>
-<p>向量范数需满足以下三个条件： - 非负性 <span class="math inline">\(\|\pmb{x}\| \ge 0\)</span>，当且仅当<span class="math inline">\(\pmb{x}=0_n\)</span>时<span class="math inline">\(\|\pmb{x}\|=0\)</span> - 齐次性 <span class="math inline">\(\|\alpha \pmb{x}\|=|\alpha| \cdot \|\pmb{x}\|\)</span> - 三角不等式 <span class="math inline">\(\|\pmb{x} + \pmb{y}\| \le \|\pmb{x}\| + \| \pmb{y}\|\)</span></p>
+<p>向量范数需满足以下三个条件：</p>
+<ul>
+<li><p>非负性<br />
+<span class="math inline">\(\|\pmb{x}\| \ge 0\)</span>，当且仅当<span class="math inline">\(\pmb{x}=0_n\)</span>时<span class="math inline">\(\|\pmb{x}\|=0\)</span></p></li>
+<li><p>齐次性<br />
+<span class="math inline">\(\|\alpha \pmb{x}\|=|\alpha| \cdot \|\pmb{x}\|\)</span></p></li>
+<li><p>三角不等式<br />
+<span class="math inline">\(\|\pmb{x} + \pmb{y}\| \le \|\pmb{x}\| + \| \pmb{y}\|\)</span></p></li>
+</ul>
 <h4 id="常用的向量范数">常用的向量范数</h4>
 <p><span class="math display">\[\|\pmb{x}\|_1=\sum_{i=1}^n|x_i|\]</span></p>
 <p><span class="math display">\[\|\pmb{x}\|_2=(\sum_{i=1}^n|x_i|^2)^{1/2}\]</span></p>
-<p><span class="math display">\[\|\pmb{x}\|_\infty=\max_{\mathclap{1 \le i \le n}}{|x_i|}\]</span></p>
+<p><span class="math display">\[\|\pmb{x}\|_\infty=\max_{1 \le i \le n}{|x_i|}\]</span></p>
 <p><span class="math display">\[\|\pmb{x}\|_p=(\sum_{i=1}^n|x_i|^p)^{1/p} ,1 \le p \lt +\infty\]</span></p>
 <h4 id="向量范数的等价性定理">向量范数的等价性定理</h4>
 <p><span class="math display">\[c_1 \|\pmb{x}\|_{\beta} \le \|\pmb{x}\|_{\alpha} \le c_2 \|\pmb{x}\|_{\beta}\]</span></p>
