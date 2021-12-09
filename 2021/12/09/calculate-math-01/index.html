@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"starduston.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Abstract 矩阵与数值分析第一章部分的笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵与数值分析笔记 Part01">
+<meta property="og:url" content="http://starduston.github.io/2021/12/09/calculate-math-01/index.html">
+<meta property="og:site_name" content="Starduson&#39;s Blog">
+<meta property="og:description" content="Abstract 矩阵与数值分析第一章部分的笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM">
+<meta property="article:published_time" content="2021-12-09T10:26:04.000Z">
+<meta property="article:modified_time" content="2021-12-09T12:40:33.204Z">
+<meta property="article:author" content="Starduston">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM">
+
+
+<link rel="canonical" href="http://starduston.github.io/2021/12/09/calculate-math-01/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://starduston.github.io/2021/12/09/calculate-math-01/","path":"2021/12/09/calculate-math-01/","title":"矩阵与数值分析笔记 Part01"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>矩阵与数值分析笔记 Part01 | Starduson's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Starduson's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-wiki"><a href="https://starduston.github.io/Wiki" rel="section"><i class="fa fa-book fa-fw"></i>Wiki</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E5%AD%A6"><span class="nav-number">2.</span> <span class="nav-text">1.1 数值数学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%95%B0%E5%AD%A6"><span class="nav-number">3.</span> <span class="nav-text">1.2 计算数学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AF%E5%B7%AE%E6%9D%A5%E6%BA%90%E5%92%8C%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">1.3 误差来源和分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90%E4%B8%8E%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">1.3.1 来源与分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.</span> <span class="nav-text">1.3.2 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97"><span class="nav-number">4.3.</span> <span class="nav-text">1.3.3 有效数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%AF%AF%E5%B7%AE%E4%BC%B0%E8%AE%A1"><span class="nav-number">4.4.</span> <span class="nav-text">1.3.4 函数的误差估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%87%BD%E6%95%B0%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">4.5.</span> <span class="nav-text">1.3.5 数值函数的稳定性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E8%AF%AF%E5%B7%AE%E5%8D%B1%E5%AE%B3"><span class="nav-number">4.6.</span> <span class="nav-text">1.3.6 避免误差危害</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0%E5%92%8C%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">1.4 向量范数和矩阵范数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">1.4.1 向量范数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0"><span class="nav-number">5.1.2.</span> <span class="nav-text">常用的向量范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7%E5%AE%9A%E7%90%86"><span class="nav-number">5.1.3.</span> <span class="nav-text">向量范数的等价性定理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">5.2.</span> <span class="nav-text">1.4.2 矩阵范数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5m1-%E8%8C%83%E6%95%B0-f-%E8%8C%83%E6%95%B0"><span class="nav-number">5.2.2.</span> <span class="nav-text">矩阵m1-范数 &amp; F-范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%B1%E5%8D%8A%E5%BE%84"><span class="nav-number">5.2.3.</span> <span class="nav-text">谱半径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0%E4%B8%8E%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0%E7%9A%84%E7%9B%B8%E5%AE%B9%E6%80%A7"><span class="nav-number">5.2.4.</span> <span class="nav-text">矩阵范数与向量范数的相容性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0%E4%BB%8E%E5%B1%9E%E8%8C%83%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">1.4.3 算子范数（从属范数）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="nav-number">5.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AE%97%E5%AD%90%E8%8C%83%E6%95%B0"><span class="nav-number">5.3.2.</span> <span class="nav-text">常用的算子范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7%E5%AE%9A%E7%90%86"><span class="nav-number">5.3.3.</span> <span class="nav-text">矩阵范数的等价性定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%B4%A8"><span class="nav-number">5.3.4.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starduston</p>
+  <div class="site-description" itemprop="description">Blog of Starduson</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/starduston" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;starduston" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://starduston.github.io/2021/12/09/calculate-math-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starduston">
+      <meta itemprop="description" content="Blog of Starduson">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starduson's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          矩阵与数值分析笔记 Part01
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-12-09 18:26:04 / Modified: 20:40:33" itemprop="dateCreated datePublished" datetime="2021-12-09T18:26:04+08:00">2021-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="abstract">Abstract</h2>
+<p>矩阵与数值分析第一章部分的笔记 <span id="more"></span></p>
+<h2 id="数值数学">1.1 数值数学</h2>
+<ul>
+<li>与分析数学（<em>利用极限、矩阵、向量等理论通过解析的方法研究数学问题</em>）不同，数值数学主要面向计算机研究以解决数学问题。</li>
+<li>数值数学是在物理学、经济等交叉学科中进行定性、定量分析的重要工具。</li>
+</ul>
+<h2 id="计算数学">1.2 计算数学</h2>
+<ul>
+<li>主要研究计算机上可计算的有效算法及其相关理论。</li>
+<li>特点：
+<ul>
+<li>构造有效算法</li>
+<li>给出可靠的理论分析（保证收敛性和数值稳定性并可进行误差分析）</li>
+<li>有较好的时间稳定性（节省时间）和空间稳定性（节省存储量）</li>
+<li>数值实验</li>
+</ul></li>
+</ul>
+<h2 id="误差来源和分类">1.3 误差来源和分类</h2>
+<h3 id="来源与分类">1.3.1 来源与分类</h3>
+<p><img src="https://storage.live.com/items/6D5D7F91CF68725D!2808?authkey=AIMRJd8SOOZnnvM" alt="误差来源与分类" /> 1. 模型误差 实际问题抽象成数学模型作简化所长生的误差 2. <strong>截断误差</strong> 数学问题转化为数值问题时算法所产生的误差 3. 观测误差 观测手段所导致的得到的数据的误差 4. <strong>舍入误差</strong> 计算机字长限制所导致的误差</p>
+<h3 id="基本概念">1.3.2 基本概念</h3>
+<p>设x为精确值，a为近似值， <strong>绝对误差</strong>：<span class="math inline">\(x-a\)</span>；</p>
+<p>设e<sub>a</sub>为常数，满足<span class="math inline">\(|x-a| \le e_a\)</span>， e<sub>a</sub>为近似值a的<strong>绝对误差界</strong>；</p>
+<p><strong>相对误差</strong>： <span class="math display">\[\frac{x-a}{x} \approx \frac{x-a}{a}\]</span></p>
+<p><strong>相对误差界</strong>： <span class="math display">\[|\frac{x-a}{a}| \le \frac{e_a}{|a|}\]</span></p>
+<blockquote>
+<p>由于误差界不唯一，为保证统一，取值时，若第一个非零数小于5，取为<span class="math inline">\(1/2 \times 10^{-\text{小数点后零的个数}}\)</span>；若大于5，进一位取值。</p>
+</blockquote>
+<h3 id="有效数字">1.3.3 有效数字</h3>
+<p>设x为精确值，a为近似值，将a表示为 <span class="math display">\[a = \pm 10^k \times 0.a_1 a_2 a_3 ... a_n ...\]</span></p>
+<p>如果其绝对误差界为 <span class="math display">\[|x-a| \le \frac1 2 \times 10^{k-n}\]</span></p>
+<p>称a为x的具有n位有效数字的近似值</p>
+<blockquote>
+<p>有效数字的位数与近似值取值位数无本质联系</p>
+</blockquote>
+<blockquote>
+<p>四舍五入得到的近似值，从最后一位向前直到再无非零数字，为有效数字</p>
+</blockquote>
+<h3 id="函数的误差估计">1.3.4 函数的误差估计</h3>
+<p>一元函数： <span class="math display">\[\frac {|f(x)-f(a)|}{|f(a)|} \approx \frac{|f&#39;(a)|}{|f(a)|}|x-a|\]</span></p>
+<p>多元函数： <span class="math display">\[|f(x_1,x_2,...,x_n)-f(a_1,a_2,...a_n)| \le \displaystyle\sum_{k=1}^n|(\frac{\partial f}{\partial x_k})||x_k-a_k|\]</span></p>
+<blockquote>
+<p>两个相近数相减会扩大误差</p>
+</blockquote>
+<h3 id="数值函数的稳定性">1.3.5 数值函数的稳定性</h3>
+<p>数值方法的稳定性：某一数值方法在计算数值解时舍入误差在一定条件下可控，称该方法数值稳定。</p>
+<h3 id="避免误差危害">1.3.6 避免误差危害</h3>
+<ul>
+<li>避免有效数字的损失
+<ul>
+<li>计算二元一次方程时韦达定理</li>
+</ul></li>
+<li>减少运算的次数
+<ul>
+<li>秦九昭算法</li>
+</ul></li>
+</ul>
+<h2 id="向量范数和矩阵范数">1.4 向量范数和矩阵范数</h2>
+<h3 id="向量范数">1.4.1 向量范数</h3>
+<h4 id="定义">定义</h4>
+<p>向量范数需满足以下三个条件： - 非负性 <span class="math inline">\(\|\pmb{x}\| \ge 0\)</span>，当且仅当<span class="math inline">\(\pmb{x}=0_n\)</span>时<span class="math inline">\(\|\pmb{x}\|=0\)</span> - 齐次性 <span class="math inline">\(\|\alpha \pmb{x}\|=|\alpha| \cdot \|\pmb{x}\|\)</span> - 三角不等式 <span class="math inline">\(\|\pmb{x} + \pmb{y}\| \le \|\pmb{x}\| + \| \pmb{y}\|\)</span></p>
+<h4 id="常用的向量范数">常用的向量范数</h4>
+<p><span class="math display">\[\|\pmb{x}\|_1=\sum_{i=1}^n|x_i|\]</span></p>
+<p><span class="math display">\[\|\pmb{x}\|_2=(\sum_{i=1}^n|x_i|^2)^{1/2}\]</span></p>
+<p><span class="math display">\[\|\pmb{x}\|_\infty=\max_{\mathclap{1 \le i \le n}}{|x_i|}\]</span></p>
+<p><span class="math display">\[\|\pmb{x}\|_p=(\sum_{i=1}^n|x_i|^p)^{1/p} ,1 \le p \lt +\infty\]</span></p>
+<h4 id="向量范数的等价性定理">向量范数的等价性定理</h4>
+<p><span class="math display">\[c_1 \|\pmb{x}\|_{\beta} \le \|\pmb{x}\|_{\alpha} \le c_2 \|\pmb{x}\|_{\beta}\]</span></p>
+<p>其中c<sub>1</sub>和c<sub>2</sub>为向量无关的正常数，称两者等价</p>
+<h3 id="矩阵范数">1.4.2 矩阵范数</h3>
+<h4 id="定义-1">定义</h4>
+<p>称<span class="math inline">\(\|\cdot\|\)</span>是<span class="math inline">\(\pmb{C}^{m \times n}\)</span>上的矩阵范数，需满足：</p>
+<ul>
+<li>非负性 <span class="math inline">\(\|\pmb{A}\| \ge 0\)</span>，当且仅当<span class="math inline">\(\pmb{A}=0_{m \times n}\)</span>时<span class="math inline">\(\|\pmb{A}\|=0\)</span></li>
+<li>齐次性 <span class="math inline">\(\|\alpha \pmb{A}\|=|\alpha| \cdot \|\pmb{A}\|\)</span></li>
+<li>三角不等式 <span class="math inline">\(\|\pmb{A} + \pmb{B}\| \le \|\pmb{A}\| + \| \pmb{B}\|\)</span></li>
+<li>相容性 <span class="math inline">\(\|\pmb{A} \pmb{B}\| \le \|\pmb{A}\| \cdot \|\pmb{B}\|\)</span></li>
+</ul>
+<h4 id="矩阵m1-范数-f-范数">矩阵m1-范数 &amp; F-范数</h4>
+<p><span class="math display">\[\|\pmb{A}\|_{m1}=\sum_{i=1}^m \sum_{j=1}^n |x_{ij}|\]</span></p>
+<p><span class="math display">\[\|\pmb{A}\|_F=(\sum_{i=1}^m \sum_{j=1}^n |x_{ij}|^2)^{1/2}\]</span></p>
+<h4 id="谱半径">谱半径</h4>
+<p>谱为矩阵的所有特征值所构成的集合，即 <span class="math inline">\(\pmb{\sigma} = \{\lambda|det(\lambda\pmb{I}-\pmb{A})=0\}\)</span> 谱半径为特征值的模的最大值，即 <span class="math inline">\(\pmb{\rho}(\pmb{A}) = \max{|\lambda_i|}\)</span></p>
+<h4 id="矩阵范数与向量范数的相容性">矩阵范数与向量范数的相容性</h4>
+<h3 id="算子范数从属范数">1.4.3 算子范数（从属范数）</h3>
+<h4 id="定义-2">定义</h4>
+<p><span class="math display">\[\|\pmb{A}\|_M = \max_{\pmb{x}\ne0} \frac{\|\pmb{A}\pmb{x}\|_v}{\|\pmb{x}\|_v} = \max_{\|\pmb{x}\|_v=1} {\|\pmb{A}\pmb{x}\|_v}\]</span></p>
+<h4 id="常用的算子范数">常用的算子范数</h4>
+<ul>
+<li>列和范数</li>
+</ul>
+<p><span class="math display">\[\|\pmb{A}\|_1 = \max_{1 \le j \le n}{\sum_{i=1}^m{|a_{ij}|}}\]</span></p>
+<ul>
+<li>行和范数</li>
+</ul>
+<p><span class="math display">\[\|\pmb{A}\|_{\infty} = \max_{1 \le i \le m}{\sum_{j=1}^n{|a_{ij}|}}\]</span></p>
+<ul>
+<li>谱范数</li>
+</ul>
+<p><span class="math display">\[\|\pmb{A}\|_2 = \sqrt{\lambda_{max} (\pmb{A^HA})}\]</span></p>
+<h4 id="矩阵范数的等价性定理">矩阵范数的等价性定理</h4>
+<p><span class="math display">\[c_1 \|\pmb{A}\|_{\beta} \le \|\pmb{A}\|_{\alpha} \le c_2 \|\pmb{A}\|_{\beta}\]</span></p>
+<h4 id="性质">性质</h4>
+<ol type="1">
+<li><span class="math inline">\(\pmb{\rho} (\pmb{A}) \le \|\pmb{A}\|_M\)</span> <span class="math inline">\(\pmb{A}\)</span>为方阵</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/math/" rel="tag"># math</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/15/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/09/calculate-math-02/" rel="next" title="矩阵与数值分析笔记 Part02">
+                  矩阵与数值分析笔记 Part02 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starduston</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
