@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Serif+SC:300,300italic,400,400italic,700,700italic%7CRoboto+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"starduston.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Abstract 这是矩阵与数值计算第六章的笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵与数值分析笔记 Part06">
+<meta property="og:url" content="http://starduston.github.io/2021/12/17/calculate-math-06/index.html">
+<meta property="og:site_name" content="Starduson&#39;s Blog">
+<meta property="og:description" content="Abstract 这是矩阵与数值计算第六章的笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2021/12/16/MFld9OEUcJGbf2s.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/16/2vNMGVO94FgL7PI.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/16/bxCj9Zc73IKSt2Y.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/16/W3yEDtRYmTAfbUk.png">
+<meta property="og:image" content="https://s2.loli.net/2021/12/16/JBDxIzZkA8HLh6v.png">
+<meta property="article:published_time" content="2021-12-17T10:56:57.000Z">
+<meta property="article:modified_time" content="2021-12-17T10:59:44.521Z">
+<meta property="article:author" content="Starduston">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2021/12/16/MFld9OEUcJGbf2s.png">
+
+
+<link rel="canonical" href="http://starduston.github.io/2021/12/17/calculate-math-06/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://starduston.github.io/2021/12/17/calculate-math-06/","path":"2021/12/17/calculate-math-06/","title":"矩阵与数值分析笔记 Part06"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>矩阵与数值分析笔记 Part06 | Starduson's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Starduson's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-wiki"><a href="https://starduston.github.io/Wiki" rel="section"><i class="fa fa-book fa-fw"></i>Wiki</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%8F%92%E5%80%BC%E7%9A%84%E6%95%B0%E5%80%BC%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">6.1 基于插值的数值求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">6.1.1 数值求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#newton-cotes%E5%85%AC%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">6.1.2 Newton-Cotes公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E7%A7%AF%E8%8A%82%E7%82%B9"><span class="nav-number">2.2.1.</span> <span class="nav-text">求积节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E7%A7%AF%E7%B3%BB%E6%95%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">求积系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%83%85%E5%BD%A2"><span class="nav-number">2.2.3.</span> <span class="nav-text">一些情形</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E6%95%B0%E7%B2%BE%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">6.1.3 代数精度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A4%E5%88%AB"><span class="nav-number">2.3.2.</span> <span class="nav-text">判别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E4%BB%A3%E6%95%B0%E7%B2%BE%E5%BA%A6"><span class="nav-number">2.3.3.</span> <span class="nav-text">一些代数精度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%8C%96%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">6.1.4 复化求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%8C%96%E6%A2%AF%E5%BD%A2%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.1.</span> <span class="nav-text">复化梯形公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%8C%96simpson%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.2.</span> <span class="nav-text">复化Simpson公式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#guass%E5%9E%8B%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">6.2 Guass型求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#guass%E5%9E%8B%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F-1"><span class="nav-number">3.1.</span> <span class="nav-text">6.2.1 Guass型求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-2"><span class="nav-number">3.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#guass%E7%82%B9%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="nav-number">3.1.2.</span> <span class="nav-text">Guass点的确定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gauss%E5%9E%8B%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">6.2.2 Gauss型求积公式的确定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gauss-chebyshev%E5%9E%8B%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">Gauss-Chebyshev型求积公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gauss-lengendre%E5%9E%8B%E6%B1%82%E7%A7%AF%E5%85%AC%E5%BC%8F"><span class="nav-number">3.2.2.</span> <span class="nav-text">Gauss-Lengendre型求积公式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E5%8C%BA%E9%97%B4-11"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">对于区间\([-1,1]\)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E5%8C%BA%E9%97%B4ab"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">对于区间\([a,b]\)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Starduston</p>
+  <div class="site-description" itemprop="description">Blog of Starduson</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/starduston" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;starduston" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://starduston.github.io/2021/12/17/calculate-math-06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Starduston">
+      <meta itemprop="description" content="Blog of Starduson">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starduson's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          矩阵与数值分析笔记 Part06
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-12-17 18:56:57 / Modified: 18:59:44" itemprop="dateCreated datePublished" datetime="2021-12-17T18:56:57+08:00">2021-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="abstract">Abstract</h1>
+<p>这是矩阵与数值计算第六章的笔记 <span id="more"></span></p>
+<h1 id="基于插值的数值求积公式">6.1 基于插值的数值求积公式</h1>
+<h2 id="数值求积公式">6.1.1 数值求积公式</h2>
+<h3 id="定义">定义</h3>
+<p>考虑带权积分<span class="math inline">\(I(f) = \int_a^b \rho(x)f(x)dx\)</span>，用<span class="math inline">\(I_n(f) = \sum_{i=0}^nA_kf(x_k)\)</span>近似计算<span class="math inline">\(I(f)\)</span>称之为数值求积，<span class="math inline">\(I_n(f)\)</span>称之为数值求积公式，<span class="math inline">\(A_k\)</span>称之为求积系数，<span class="math inline">\(x_k\)</span>称之为求积节点。</p>
+<h2 id="newton-cotes公式">6.1.2 Newton-Cotes公式</h2>
+<h3 id="求积节点">求积节点</h3>
+<p>将<span class="math inline">\([a,b]\)</span>分为<span class="math inline">\(n\)</span>等份，步长为<span class="math inline">\(h=\frac{b-a}{n}\)</span>，节点为<span class="math inline">\(x_k=a+kh,k=0,1,\dots,n\)</span></p>
+<h3 id="求积系数">求积系数</h3>
+<p><span class="math inline">\(f(x)\)</span>近似取为其Lagrange插值多项式，则求积系数<span class="math inline">\(A_k = \int_a^b l_k(x)dx, k=0,1,\dots,n\)</span></p>
+<h3 id="一些情形">一些情形</h3>
+<ul>
+<li><span class="math inline">\(n=1\)</span>，梯形求积公式：</li>
+</ul>
+<p><span class="math display">\[I_1(f) = \frac{b-a}{2}(f(a)+f(b))\]</span></p>
+<ul>
+<li><span class="math inline">\(n=2\)</span>，Simpson求积公式：</li>
+</ul>
+<p><span class="math display">\[I_2(f) = \frac{b-a}{6}(f(a)+4f(\frac{a+b}{2}))+f(b))\]</span></p>
+<h2 id="代数精度">6.1.3 代数精度</h2>
+<h3 id="定义-1">定义</h3>
+<p><img src="https://s2.loli.net/2021/12/16/MFld9OEUcJGbf2s.png" /></p>
+<h3 id="判别">判别</h3>
+<p>一般来说，取<span class="math inline">\(f(x) = 1, x, x^2, \dots\)</span>，来判断是否有<span class="math inline">\(\int_a^b x^m = \sum_{i=0}^nA_kf(x_k)\)</span>，直到试出不相等为止，来判断代数精度</p>
+<h3 id="一些代数精度">一些代数精度</h3>
+<ul>
+<li><p>梯形求积公式，<span class="math inline">\(m=1\)</span></p></li>
+<li><p>Simpson求积公式，<span class="math inline">\(m=3\)</span></p></li>
+<li></li>
+</ul>
+<p><img src="https://s2.loli.net/2021/12/16/2vNMGVO94FgL7PI.png" /></p>
+<h2 id="复化求积公式">6.1.4 复化求积公式</h2>
+<p>类似于求积分时分成若干段求小曲边梯形面积之和</p>
+<h3 id="复化梯形公式">复化梯形公式</h3>
+<p><span class="math display">\[T_n = \frac{b-a}{2n}(f(a) + 2\sum_{k=1}^{n-1}f(x_k) + f(b))\]</span></p>
+<h3 id="复化simpson公式">复化Simpson公式</h3>
+<p><span class="math display">\[T_n = \frac{b-a}{6n}(f(a) + 2\sum_{k=1}^{n-1}f(x_k) + 4\sum_{k=0}^{n-1}f(x_{k+\frac{1}{2}}) + f(b))\]</span></p>
+<h1 id="guass型求积公式">6.2 Guass型求积公式</h1>
+<h2 id="guass型求积公式-1">6.2.1 Guass型求积公式</h2>
+<h3 id="定义-2">定义</h3>
+<p><img src="https://s2.loli.net/2021/12/16/bxCj9Zc73IKSt2Y.png" /></p>
+<h3 id="guass点的确定">Guass点的确定</h3>
+<p><img src="https://s2.loli.net/2021/12/16/W3yEDtRYmTAfbUk.png" /></p>
+<h2 id="gauss型求积公式的确定">6.2.2 Gauss型求积公式的确定</h2>
+<h3 id="gauss-chebyshev型求积公式">Gauss-Chebyshev型求积公式</h3>
+<p><img src="https://s2.loli.net/2021/12/16/JBDxIzZkA8HLh6v.png" /></p>
+<h3 id="gauss-lengendre型求积公式">Gauss-Lengendre型求积公式</h3>
+<h4 id="对于区间-11">对于区间<span class="math inline">\([-1,1]\)</span></h4>
+<p>构造正交多项式<span class="math inline">\(\phi_n(x)\)</span>，求出其零点即Gauss点，此时求积系数<span class="math inline">\(A_k\)</span>可以通过对插值基函数求积分<span class="math inline">\(\int_{-1}^1l_k(x)dx\)</span>得到，也可通过取<span class="math inline">\(f(x) = 1,x,x^2,\dots\)</span>带入<span class="math inline">\(\int_a^b \rho(x)f(x)dx = \sum_{i=0}^nA_kf(x_k)\)</span>解出<span class="math inline">\(A_k\)</span></p>
+<h4 id="对于区间ab">对于区间<span class="math inline">\([a,b]\)</span></h4>
+<p>构造<span class="math inline">\(x = \frac{b+a}{2} + \frac{b-a}{2}t\)</span>，使得<span class="math inline">\(x \in [a,b] \iff t \in [-1,1]\)</span>，之后同上。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/math/" rel="tag"># math</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/17/calculate-math-05/" rel="prev" title="矩阵与数值分析笔记 Part05">
+                  <i class="fa fa-chevron-left"></i> 矩阵与数值分析笔记 Part05
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/17/calculate-math-07/" rel="next" title="矩阵与数值分析笔记 Part07">
+                  矩阵与数值分析笔记 Part07 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starduston</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
